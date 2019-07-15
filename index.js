@@ -51,7 +51,7 @@ api.on('message', function (message) { // Received text message
             }
         );
     }
-    else if (/sexy/.test(message.text)) {
+    else if (/bro/.test(message.text)) {
         api.sendDocument(
             {
                 chat_id: message.chat.id,

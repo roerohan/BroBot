@@ -1,2 +1,2 @@
-# brobot
+# CSI Brobot
 project

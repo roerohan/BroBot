@@ -16,15 +16,11 @@ api.getMe()
     .catch(function (err) {
         console.log(err);
     });
-api.on('message', function (message) {
+api.on('message', function (message) { // Received text message
     message.text = message.text.toLowerCase();
-    if (message.text === '/count' || message.text === '/count@CSI_Brobot') {// Received text message
-        if (message.chat.title === 'Bot Testing') { passgiven = 1; }
-        if (passgiven == 0) {
-            console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh');
-            console.log('yes i got');
-            console.log(message);
-
+    if (message.text === '/count' || message.text === '/count@CSI_Brobot') { //got a count command
+        if (/csi/.test(message.chat.title.toLowerCase())) { passgiven = 1; } //for CSI groups
+        if (passgiven == 0) { //one time password
             api.sendMessage(
                 {
                     chat_id: message.chat.id,
@@ -70,7 +66,7 @@ api.on('message', function (message) {
                 text: 'Me No Understands'
             }
         );
-    console.log(message);
+
 
 }
 

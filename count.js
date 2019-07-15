@@ -10,10 +10,8 @@ counter = function (message, api) {
         if (!error && response.statusCode == 200) {
             const $ = cheerio.load(html);
 
-            //console.log($.html());
-            console.log($.html());
-            counts = $('td').text();
-            console.log(counts);
+             counts = $('td').text();
+
             api.sendMessage(
                 {
                     chat_id: message.chat.id,
@@ -21,11 +19,9 @@ counter = function (message, api) {
                 }
             );
 
-            //console.log($('td').text()+'\n');
 
         }
     });
 }
 
 module.exports.counter = counter;
-module.exports.counts = counts;

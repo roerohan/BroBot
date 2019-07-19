@@ -18,10 +18,11 @@ api.getMe()
     });
 api.on('message', function (message) { // Received text message
     message.text = message.text.toLowerCase();
-    message.chat.title = message.chat.title.toLowerCase();
     if (message.text === '/count' || message.text === '/count@CSI_Brobot') { //got a count command
         if (message.text === '/count@CSI_Brobot') {
-            if (/csi/.test(message.chat.title.toLowerCase())) { passgiven = 1; }
+
+        message.chat.title = message.chat.title.toLowerCase();
+            if (/csi/.test(message.chat.title)) { passgiven = 1; }
         } //for CSI groups
         if (passgiven == 0) { //one time password
             api.sendMessage(

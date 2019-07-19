@@ -19,7 +19,8 @@ api.getMe()
 api.on('message', function (message) { // Received text message
     message.text = message.text.toLowerCase();
     if (message.text === '/count' || message.text === '/count@CSI_Brobot') { //got a count command
-        if (/csi/.test(message.chat.title.toLowerCase())) { passgiven = 1; } //for CSI groups
+        if(message.text === '/count@CSI_Brobot'){
+        if (/csi/.test(message.chat.title.toLowerCase())) { passgiven = 1; }} //for CSI groups
         if (passgiven == 0) { //one time password
             api.sendMessage(
                 {

@@ -42,7 +42,7 @@ api.on('message', function (message) { // Received text message
         } //for CSI groups
 
         }
-    
+
 
     else if (/bigbutt/i.test(message.text) && passgiven == 0) {
         Regcount.counter(message, api);
@@ -50,7 +50,7 @@ api.on('message', function (message) { // Received text message
         passgiven = 1;
     }
 
-    else if (/hey/i.test(message.text) || /hello/i.test(message.text) || /hi/i.test(message.text)) {
+    else if (/hey /i.test(message.text) || /hello /i.test(message.text) || /hi /i.test(message.text)) {
         api.sendDocument(
             {
                 chat_id: message.chat.id,
@@ -58,11 +58,19 @@ api.on('message', function (message) { // Received text message
             }
         );
     }
-    else if (/sexy/i.test(message.text)) {
+    else if (/sexy /i.test(message.text)) {
         api.sendDocument(
             {
                 chat_id: message.chat.id,
                 document: "assets/tenor.gif"
+            }
+        );
+    }
+    else if (/love /i.test(message.text)) {
+        api.sendMessage(
+            {
+                chat_id: message.chat.id,
+                text: 'I love you too bro 🤤🤤'
             }
         );
     }

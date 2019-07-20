@@ -17,37 +17,40 @@ api.getMe()
         console.log(err);
     });
 api.on('message', function (message) { // Received text message
-    message.text = message.text.toLowerCase();
-    if (message.text === '/count' || message.text === '/count@CSI_Brobot') { //got a count command
-        if (message.text === '/count@CSI_Brobot') {
-
-        message.chat.title = message.chat.title.toLowerCase();
-            if (/csi/.test(message.chat.title)) { passgiven = 1; }
-        } //for CSI groups
-        if (passgiven == 0) { //one time password
-            api.sendMessage(
-                {
-                    chat_id: message.chat.id,
-                    text: 'Are you Csi? Password please'
-                }
-            );
-
-
-        }
-        else {
-            Regcount.counter(message, api);
-
-
-        }
+    if(message.text==='/start'){
+        console.log(message);
+        api.sendMessage(
+            {
+                chat_id: message.chat.id,
+                text: 'Hey There Bro \n Are you Csi? Password please'
+            }
+        );
     }
+    else if (message.text === '/count' || message.text === '/count@CSI_Brobot') { //got a count command
 
-    else if (/bigbutt/.test(message.text) && passgiven == 0) {
+            if(!message.chat.title){
+                api.sendMessage(
+                    {
+                        chat_id: message.chat.id,
+                        text: 'This command only works for groups'
+                    }
+                );
+            }
+            else{
+        message.chat.title = message.chat.title.toLowerCase();
+            if (/csi/.test(message.chat.title)) {  Regcount.counter(message, api); }
+        } //for CSI groups
+
+        }
+    
+
+    else if (/bigbutt/i.test(message.text) && passgiven == 0) {
         Regcount.counter(message, api);
 
         passgiven = 1;
     }
 
-    else if (/hey/.test(message.text) || /hello/.test(message.text) || /hi/.test(message.text)) {
+    else if (/hey/i.test(message.text) || /hello/i.test(message.text) || /hi/i.test(message.text)) {
         api.sendDocument(
             {
                 chat_id: message.chat.id,
@@ -55,7 +58,7 @@ api.on('message', function (message) { // Received text message
             }
         );
     }
-    else if (/sexy/.test(message.text)) {
+    else if (/sexy/i.test(message.text)) {
         api.sendDocument(
             {
                 chat_id: message.chat.id,

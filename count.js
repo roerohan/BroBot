@@ -17,7 +17,7 @@ counter = function (message, api) {
 
             api.sendMessage({
                 chat_id: message.chat.id,
-                text: "Badly scrapped devspace page" + counts
+                text:  + counts
             });
 
 

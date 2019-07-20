@@ -38,7 +38,15 @@ api.on('message', function (message) { // Received text message
             }
             else{
         message.chat.title = message.chat.title.toLowerCase();
-            if (/csi/.test(message.chat.title)) {  Regcount.counter(message, api); }
+            if (/csi/.test(message.chat.title)) {
+
+                api.sendMessage(
+                    {
+                        chat_id: message.chat.id,
+                        text: 'Getting registration counts'
+                    }
+                );
+                Regcount.counter(message, api); }
         } //for CSI groups
 
         }

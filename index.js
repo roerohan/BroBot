@@ -1,4 +1,3 @@
-var passgiven = 0;
 var telegram = require('telegram-bot-api');
 const Regcount = require('./count.js')
 
@@ -52,10 +51,14 @@ api.on('message', function (message) { // Received text message
         }
 
 
-    else if (/bigbutt/i.test(message.text) && passgiven == 0) {
+    else if (/bigbutt/i.test(message.text) ) {
+        api.sendMessage(
+            {
+                chat_id: message.chat.id,
+                text: 'Getting registration counts'
+            }
+        );
         Regcount.counter(message, api);
-
-        passgiven = 1;
     }
 
     else if (/hey /i.test(message.text) || /hello /i.test(message.text) || /hi /i.test(message.text)) {

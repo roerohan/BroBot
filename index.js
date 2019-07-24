@@ -2,7 +2,7 @@ var telegram = require('telegram-bot-api');
 const Regcount = require('./count.js')
 const Free = require('./free.js')
 const data= require('./brobot.js')
-pass=data.pass;
+const password=data.pass;
 var api = new telegram({
     token: data.token,
     updates: {
@@ -51,7 +51,7 @@ api.on('message', function (message) { // Received text message
         } //for CSI groups
 
         }
-    else if (pass.test(message.text) ) {
+    else if (message.text==password ) {
         api.sendMessage(
             {
                 chat_id: message.chat.id,

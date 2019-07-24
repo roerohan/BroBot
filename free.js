@@ -54,12 +54,19 @@ freepeople = function (message, api) {
                 free.push(t + "-" + t2 + "\t =>" + x[i]);
 
             }
+            if(ISTTime.getHours()<8)
+            {api.sendMessage({
+                chat_id: message.chat.id,
+                text: "everyone is free"
 
+            });}
+            else{
             api.sendMessage({
                 chat_id: message.chat.id,
                 text: free[ISTTime.getHours()-8],
 
             });
+        }
 
 
 

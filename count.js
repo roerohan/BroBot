@@ -12,7 +12,7 @@ counter = function (message, api) {
         if (!error && response.statusCode == 200) {
             const $ = cheerio.load(html);
 
-            counts = $("h1").first().text() + '\b' + $("#cnt").first().text() + '\b' + $("h1").last().text() + $("#cnt").last().text();
+            counts = $("h1").first().text() + '\b' + $("#cnt").first().text() + '\b' + $("h1").last().text() +'\b' + $("#cnt").last().text();
 
 
             api.sendMessage({

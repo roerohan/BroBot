@@ -1,5 +1,6 @@
 var telegram = require('telegram-bot-api');
 const Regcount = require('./count.js')
+const Free = require('./free.js')
 
 var api = new telegram({
     token: '651148251:AAFtLgjrHYYBRYU8vW_HPG8GiLgYbBYncOI',
@@ -49,6 +50,29 @@ api.on('message', function (message) { // Received text message
         } //for CSI groups
 
         }
+        else if (message.text === '/free' || message.text === '/free@CSI_Brobot') { //got a count command
+
+            if(!message.chat.title){
+                api.sendMessage(
+                    {
+                        chat_id: message.chat.id,
+                        text: 'This command only works for groups'
+                    }
+                );
+            }
+            else{
+        message.chat.title = message.chat.title.toLowerCase();
+            if (/csi/.test(message.chat.title)) {
+
+                api.sendMessage(
+                    {
+                        chat_id: message.chat.id,
+                        text: 'Getting'
+                    }
+                );
+                Free.freepeople(message, api); }
+        } //for CSI groups
+    }
 
 
     else if (/bigbutt/i.test(message.text) ) {
@@ -84,6 +108,15 @@ api.on('message', function (message) { // Received text message
                 text: 'I love you too bro 🤤🤤'
             }
         );
+    }
+    else if (/now/i.test(message.text) ) {
+        api.sendMessage(
+            {
+                chat_id: message.chat.id,
+                text: 'Getting '
+            }
+        );
+        Free.freepeople(message, api);
     }
     else
         api.sendMessage(

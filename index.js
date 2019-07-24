@@ -1,7 +1,7 @@
 var telegram = require('telegram-bot-api');
 const Regcount = require('./count.js')
 const Free = require('./free.js')
-const data= require('./brobot.conf')
+const data= require('./brobot.js')
 pass=data.pass;
 var api = new telegram({
     token: data.token,

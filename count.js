@@ -1,7 +1,7 @@
 const request = require('request');
 const cheerio = require('cheerio');
 var counts;
-const data= require('./brobot.conf')
+const data= require('./brobot.js')
 counter = function (message, api) {
     request.post({
         headers: {

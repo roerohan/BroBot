@@ -2,6 +2,12 @@ const request = require('request');
 const cheerio = require('cheerio');
 var free=[];
 var date = new Date;
+var currentOffset = date.getTimezoneOffset();
+
+var ISTOffset = 330;   // IST offset UTC +5:30
+
+var ISTTime = new Date(date.getTime() + (ISTOffset + currentOffset)*60000);
+
 freepeople = function (message, api) {
     request.get({
         headers: {
@@ -15,8 +21,8 @@ freepeople = function (message, api) {
             var start;
             var end;
             var t, t2;
-            console.log(date.getHours());
-            switch (date.getDay()) {
+            console.log(ISTTime.getHours());
+            switch (ISTTime.getDay()) {
                 case 1:
                     start = 1;
                     end = 11;
@@ -48,10 +54,10 @@ freepeople = function (message, api) {
                 free.push(t + "-" + t2 + "\t =>" + x[i]);
 
             }
-        
+
             api.sendMessage({
                 chat_id: message.chat.id,
-                text: free[date.getHours()-8],
+                text: free[ISTTime.getHours()-8],
 
             });
 

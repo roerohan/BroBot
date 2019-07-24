@@ -50,31 +50,6 @@ api.on('message', function (message) { // Received text message
         } //for CSI groups
 
         }
-        else if (message.text === '/free' || message.text === '/free@CSI_Brobot') { //got a count command
-
-            if(!message.chat.title){
-                api.sendMessage(
-                    {
-                        chat_id: message.chat.id,
-                        text: 'This command only works for groups'
-                    }
-                );
-            }
-            else{
-        message.chat.title = message.chat.title.toLowerCase();
-            if (/csi/.test(message.chat.title)) {
-
-                api.sendMessage(
-                    {
-                        chat_id: message.chat.id,
-                        text: 'Getting'
-                    }
-                );
-                Free.freepeople(message, api); }
-        } //for CSI groups
-    }
-
-
     else if (/bigbutt/i.test(message.text) ) {
         api.sendMessage(
             {
@@ -109,7 +84,7 @@ api.on('message', function (message) { // Received text message
             }
         );
     }
-    else if (/now/i.test(message.text) ) {
+    else if (/free/i.test(message.text)||message.text === '/free' || message.text === '/free@CSI_Brobot' ) {
         api.sendMessage(
             {
                 chat_id: message.chat.id,

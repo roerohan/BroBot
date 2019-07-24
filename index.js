@@ -1,6 +1,8 @@
 var telegram = require('telegram-bot-api');
-const Regcount = require('./count.js')
-const Free = require('./free.js')
+const Regcount = require('./count.js');
+const Free = require('./free.js');
+const fs = require('fs');
+const Memes = require('./meme.js');
 
 var api = new telegram({
     token: '651148251:AAFtLgjrHYYBRYU8vW_HPG8GiLgYbBYncOI',
@@ -16,8 +18,8 @@ api.getMe()
     .catch(function (err) {
         console.log(err);
     });
-api.on('message', function (message) { // Received text message
-    if(message.text==='/start'){
+api.on('message', async function (message) { // Received text message
+    if (message.text === '/start') {
         console.log(message);
         api.sendMessage(
             {
@@ -28,16 +30,16 @@ api.on('message', function (message) { // Received text message
     }
     else if (message.text === '/count' || message.text === '/count@CSI_Brobot') { //got a count command
 
-            if(!message.chat.title){
-                api.sendMessage(
-                    {
-                        chat_id: message.chat.id,
-                        text: 'This command only works for groups'
-                    }
-                );
-            }
-            else{
-        message.chat.title = message.chat.title.toLowerCase();
+        if (!message.chat.title) {
+            api.sendMessage(
+                {
+                    chat_id: message.chat.id,
+                    text: 'This command only works for groups'
+                }
+            );
+        }
+        else {
+            message.chat.title = message.chat.title.toLowerCase();
             if (/csi/.test(message.chat.title)) {
 
                 api.sendMessage(
@@ -46,11 +48,12 @@ api.on('message', function (message) { // Received text message
                         text: 'Getting registration counts'
                     }
                 );
-                Regcount.counter(message, api); }
+                Regcount.counter(message, api);
+            }
         } //for CSI groups
 
-        }
-    else if (/bigbutt/i.test(message.text) ) {
+    }
+    else if (/bigbutt/i.test(message.text)) {
         api.sendMessage(
             {
                 chat_id: message.chat.id,
@@ -84,24 +87,42 @@ api.on('message', function (message) { // Received text message
             }
         );
     }
-    else if (/free/i.test(message.text)||message.text === '/free' || message.text === '/free@CSI_Brobot' ) {
+    else if (/free/i.test(message.text) || message.text === '/free' || message.text === '/free@CSI_Brobot') {
         api.sendMessage(
             {
                 chat_id: message.chat.id,
-                text: 'Getting '
+                text: 'Getting this'
             }
         );
         Free.freepeople(message, api);
     }
-    else
+    else if (/memes/i.test(message.text) || message.text === '/meme' || message.text === '/meme@CSI_Brobot') {
+        api.sendMessage(
+            {
+                chat_id: message.chat.id,
+                text: 'Lemmi find some dank ones!'
+            }
+        );
+        await Memes.downloadMemes();
+        let files = new Array();
+        fs.readdirSync('memes').forEach(file => {
+            files.push("memes/" + file);
+        });
+        Promise.all(files.map(file => {
+            api.sendPhoto({
+                chat_id: message.chat.id,
+                photo:file
+            });
+        })).catch((err) => {
+            console.log(err);
+        });
+    }
+    else {
         api.sendMessage(
             {
                 chat_id: message.chat.id,
                 text: 'Me No Understands'
             }
         );
-
-
-}
-
-);
+    }
+});

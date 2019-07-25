@@ -1,12 +1,7 @@
 const request = require('request');
 const cheerio = require('cheerio');
 var free = [];
-var date = new Date;
-var currentOffset = date.getTimezoneOffset();
 
-var ISTOffset = 330; // IST offset UTC +5:30
-
-var ISTTime = new Date(date.getTime() + (ISTOffset + currentOffset) * 60000);
 
 freepeople = function (message, api) {
     request.get({

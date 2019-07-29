@@ -42,6 +42,10 @@ freepeople = function (message, api) {
             case 5:
                 start = 49;
                 end = 59;
+                break;
+            default:
+                start = 49;
+                end = 59;
         }
         console.log(start + "start end" + end);
         var x = [];
@@ -54,7 +58,7 @@ freepeople = function (message, api) {
             free.push(t + "-" + t2 + "\t =>" + x[i]);
 
         }
-        if (ISTTime.getHours() < 8) {
+        if (ISTTime.getHours() < 8 || ISTTime.getHours() > 19) {
             api.sendMessage({
                 chat_id: message.chat.id,
                 text: "everyone is free"

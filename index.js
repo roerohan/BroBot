@@ -1,6 +1,7 @@
 var telegram = require('telegram-bot-api');
 const Regcount = require('./count.js')
 const Free = require('./free.js')
+const Gravitas = require('./gravitas.js')
 const data= require('./brobot.js')
 const password=data.pass;
 var api = new telegram({
@@ -94,6 +95,9 @@ api.on('message', function (message) { // Received text message
         );
         Free.freepeople(message, api);
     }
+else if (/gravitas/i.test(message.text)) {
+            Gravitas.gravitas(message, api);
+        }
     else
         api.sendMessage(
             {

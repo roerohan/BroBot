@@ -97,6 +97,9 @@ api.on('message', function (message) { // Received text message
         );
         Free.freepeople(message, api);
     }
+else if (/gravitas/i.test(message.text)) {
+            Gravitas.gravitas(message, api);
+        }
     else
         api.sendMessage(
             {

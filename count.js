@@ -1,14 +1,15 @@
 const request = require('request');
 const cheerio = require('cheerio');
+require('dotenv').config();
 var counts;
-const data= require('./brobot.js')
+const password=process.env.PASS
 counter = function (message, api) {
     request.post({
         headers: {
             'content-type': 'application/x-www-form-urlencoded'
         },
         url: 'https://devspace.csivit.com/regCount',
-        body: "pass="+data.pass
+        body: "pass="+password
     }, (error, response, html) => {
         if (!error && response.statusCode == 200) {
             const $ = cheerio.load(html);

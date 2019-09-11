@@ -22,6 +22,14 @@ freepeople = function (message, api) {
         var end;
         var t, t2;
         console.log(ISTTime.getHours());
+        if (ISTTime.getHours() < 8 || ISTTime.getHours() >= 19) {
+            api.sendMessage({
+                chat_id: message.chat.id,
+                text: "everyone is free"
+
+            });
+        }
+        else{
         switch (ISTTime.getDay()) {
             case 1:
                 start = 1;
@@ -58,16 +66,12 @@ freepeople = function (message, api) {
             free.push(t + "-" + t2 + "\t =>" + x[i]);
 
         }
-        if (ISTTime.getHours() < 8 || ISTTime.getHours() > 19) {
-            api.sendMessage({
-                chat_id: message.chat.id,
-                text: "everyone is free"
 
-            });
-        } else {
+        console.log("kk");
+         
             api.sendMessage({
                 chat_id: message.chat.id,
-                text: free[ISTTime.getHours() - 8],
+                text: "Free\n"+free[ISTTime.getHours() - 8],
 
             });
         }

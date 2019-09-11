@@ -1,10 +1,13 @@
 var telegram = require('telegram-bot-api');
 const Regcount = require('./count.js')
 const Free = require('./free.js')
-const data= require('./brobot.js')
-const password=data.pass;
+require('dotenv').config();
+const API_token= process.env.API_TOKEN
+console.log("hfjkdhgjhdihgkjdsg")
+console.log(API_token)
+const password=process.env.PASS
 var api = new telegram({
-    token: data.token,
+    token: API_token,
     updates: {
         enabled: true
     }
@@ -37,7 +40,7 @@ api.on('message', function (message) { // Received text message
                     }
                 );
             }
-            else{
+            else{console.log(message);
         message.chat.title = message.chat.title.toLowerCase();
             if (/csi/.test(message.chat.title)) {
 

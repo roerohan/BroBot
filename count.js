@@ -1,4 +1,5 @@
 const request = require('request');
+// Remove later
 const cheerio = require('cheerio');
 require('dotenv').config();
 var counts;

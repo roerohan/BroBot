@@ -3,7 +3,6 @@ const Regcount = require('./count.js')
 const Free = require('./free.js')
 require('dotenv').config();
 const API_token= process.env.API_TOKEN
-console.log("hfjkdhgjhdihgkjdsg")
 console.log(API_token)
 const password=process.env.PASS
 var api = new telegram({
@@ -97,6 +96,9 @@ api.on('message', function (message) { // Received text message
         );
         Free.freepeople(message, api);
     }
+else if (/gravitas/i.test(message.text)) {
+            Gravitas.gravitas(message, api);
+        }
     else
         api.sendMessage(
             {

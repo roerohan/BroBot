@@ -1,7 +1,8 @@
 var telegram = require('telegram-bot-api');
-const Regcount = require('./count.js')
-const Free = require('./free.js')
+const Regcount = require('./count.js');
+const Free = require('./free.js');
 require('dotenv').config();
+const Gravitas=require('./gravitas.js');
 const API_token= process.env.API_TOKEN
 console.log("hfjkdhgjhdihgkjdsg")
 console.log(API_token)
@@ -20,7 +21,8 @@ api.getMe()
     .catch(function (err) {
         console.log(err);
     });
-api.on('message', function (message) { // Received text message
+api.on('message', function (message) {
+    console.log(message);// Received text message
     if(message.text==='/start'){
         console.log(message);
         api.sendMessage(

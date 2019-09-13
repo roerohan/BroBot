@@ -1,7 +1,9 @@
-var telegram = require('telegram-bot-api');
+var telegram = require('telegram-bot-api')
 const Regcount = require('./count.js')
 const Free = require('./free.js')
 require('dotenv').config();
+const Gravitas=require('./gravitas.js')
+const Ctf=require('./ctf.js')
 const API_token= process.env.API_TOKEN
 console.log(API_token)
 const password=process.env.PASS
@@ -95,6 +97,9 @@ api.on('message', function (message) { // Received text message
             }
         );
         Free.freepeople(message, api);
+    }
+    else if (/ctf/i.test(message.text)||message.text === '/CTF' || message.text === '/CTF@CSI_Brobot' ) {
+        Ctf.Regcount(message, api);
     }
 else if (/gravitas/i.test(message.text)) {
             Gravitas.gravitas(message, api);

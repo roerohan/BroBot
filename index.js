@@ -1,14 +1,17 @@
-var telegram = require('telegram-bot-api');
-
-const Regcount = require('./count.js');
+var telegram = require('telegram-bot-api')
+const Regcount = require('./count.js')
 const Free = require('./free.js');
 const fs = require('fs');
 const Memes = require('./meme.js');
 const data = require('./brobot.js')
-pass = data.pass;
-
+require('dotenv').config();
+const Gravitas = require('./gravitas.js')
+const Ctf = require('./ctf.js')
+const API_token = process.env.API_TOKEN
+console.log(API_token)
+const password = process.env.PASS
 var api = new telegram({
-    token: data.token,
+    token: API_token,
     updates: {
         enabled: true
     }
@@ -42,6 +45,7 @@ api.on('message', async function (message) { // Received text message
             );
         }
         else {
+            console.log(message);
             message.chat.title = message.chat.title.toLowerCase();
             if (/csi/.test(message.chat.title)) {
 
@@ -56,7 +60,7 @@ api.on('message', async function (message) { // Received text message
         } //for CSI groups
 
     }
-    else if (pass.test(message.text)) {
+    else if (message.text == password) {
         api.sendMessage(
             {
                 chat_id: message.chat.id,
@@ -119,6 +123,13 @@ api.on('message', async function (message) { // Received text message
         })).catch((err) => {
             console.log(err);
         });
+    }
+
+    else if (/ctf/i.test(message.text) || message.text === '/CTF' || message.text === '/CTF@CSI_Brobot') {
+        Ctf.Regcount(message, api);
+    }
+    else if (/gravitas/i.test(message.text)) {
+        Gravitas.Regcount(message, api);
     }
     else {
         api.sendMessage(

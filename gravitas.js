@@ -3,7 +3,7 @@ var url = "mongodb://localhost:27017/GravitasDB";
 
 
 
-gravitas = function (message, api) {
+Regcount = function (message, api) {
 
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
@@ -43,4 +43,4 @@ gravitas = function (message, api) {
 
 }
 
-module.exports.gravitas = Regcount;
+module.exports.Regcount = Regcount;

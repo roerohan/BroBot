@@ -3,11 +3,7 @@ var url = "mongodb://localhost:27017/ctf";
 
 
 
-ctf = function (message, api) {
-
-
-
-
+Regcount = function (message, api) {
 
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
@@ -31,4 +27,4 @@ ctf = function (message, api) {
 
 }
 
-module.exports.ctf = Regcount;
+module.exports.Regcount = Regcount;

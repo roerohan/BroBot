@@ -3,7 +3,6 @@ const Regcount = require('./count.js')
 const Free = require('./free.js');
 const fs = require('fs');
 const Memes = require('./meme.js');
-const data = require('./brobot.js')
 require('dotenv').config();
 const Gravitas = require('./gravitas.js')
 const Ctf = require('./ctf.js')

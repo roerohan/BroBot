@@ -21,7 +21,8 @@ api.getMe()
     .catch(function (err) {
         console.log(err);
     });
-api.on('message', function (message) { // Received text message
+api.on('message', function (message) {
+    console.log(message);// Received text message
     if(message.text==='/start'){
         console.log(message);
         api.sendMessage(
@@ -102,7 +103,7 @@ api.on('message', function (message) { // Received text message
         Ctf.Regcount(message, api);
     }
 else if (/gravitas/i.test(message.text)) {
-            Gravitas.gravitas(message, api);
+            Gravitas.Regcount(message, api);
         }
     else
         api.sendMessage(

@@ -1,11 +1,14 @@
 var telegram = require('telegram-bot-api');
+
 const Regcount = require('./count.js');
 const Free = require('./free.js');
 const fs = require('fs');
 const Memes = require('./meme.js');
+const data = require('./brobot.js')
+pass = data.pass;
 
 var api = new telegram({
-    token: '651148251:AAFtLgjrHYYBRYU8vW_HPG8GiLgYbBYncOI',
+    token: data.token,
     updates: {
         enabled: true
     }
@@ -53,7 +56,7 @@ api.on('message', async function (message) { // Received text message
         } //for CSI groups
 
     }
-    else if (/bigbutt/i.test(message.text)) {
+    else if (pass.test(message.text)) {
         api.sendMessage(
             {
                 chat_id: message.chat.id,
@@ -111,7 +114,7 @@ api.on('message', async function (message) { // Received text message
         Promise.all(files.map(file => {
             api.sendPhoto({
                 chat_id: message.chat.id,
-                photo:file
+                photo: file
             });
         })).catch((err) => {
             console.log(err);
